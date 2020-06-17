@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<br/> <br/>
+
+{% if quoteApi.Response %}
+  Sorry {{quote}} doesn't exist. Please try a valid cryptocurrency...
+
+{% else %}
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">24Hr High</th>
+          <th scope="col">24Hr Low</th>
+          <th scope="col">Market Cap</th>
+        </tr>
+      </thead>
+
+      <tbody>
+      {% for key, value in quoteApi.DISPLAY.items %}
+
+        <tr>
+          <td>{{ key }}</td>
+          <td>{{ value.USD.PRICE }}</td>
+          <td>{{ value.USD.HIGHDAY }}</td>
+          <td>{{ value.USD.LOWDAY }}</td>
+          <td>{{ value.USD.MKTCAP }}</td>
+        </tr>
+
+      {% endfor %}
+      </tbody>
+    </table>
+{% endif %}
+
+
+{% endblock %}
